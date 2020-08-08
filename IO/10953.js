@@ -3,16 +3,24 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
+var count = 0;
 
-var plusTwoNum = () => {
-  rl.question("", function (el) {
-    [a, b] = el.split(",").map((el) => parseInt(el));
-    if (a === 0 && b === 0) {
-      rl.close();
-    }
-    console.log(a + b);
-    plusTwoNum();
+var func = function () {
+  rl.question("", function (n) {
+    plusTwoNum(parseInt(n));
   });
 };
 
-plusTwoNum();
+var plusTwoNum = function (n) {
+  rl.question("", function (el) {
+    [a, b] = el.split(",").map((el) => parseInt(el));
+    console.log(a + b);
+    count = count + 1;
+    if (count == n) {
+      rl.close();
+    }
+    plusTwoNum(n);
+  });
+};
+
+func();
