@@ -9,6 +9,16 @@ arr = [];
 rl.question("", () => {
   rl.question("", (numbers) => {
     arr = numbers.split(" ").map((el) => parseInt(el));
+    let max = arr[0];
+    let min = arr[0];
+    for (let el of arr) {
+      if (el > max) {
+        max = el;
+      }
+      if (el < min) {
+        min = el;
+      }
+    }
 
     console.log(`${Math.min(...arr)} ${Math.max(...arr)}`);
     rl.close();
