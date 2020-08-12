@@ -10,8 +10,8 @@ rl.on("line", (num) => {
     let totalSpaceNum = nLine * 2 - 1;
     let numOfStars = 2 * i - 1;
     let stars = "*".repeat(numOfStars);
-    let space = " ".repeat((totalSpaceNum - numOfStars) / 2);
-    console.log(space + stars + space);
+    let space = "!".repeat((totalSpaceNum - numOfStars) / 2);
+    console.log(space, stars, space);
   }
   rl.close();
 });
