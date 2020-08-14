@@ -5,14 +5,15 @@ const rl = readline.createInterface({
 });
 
 rl.on("line", (num) => {
-  nLine = parseInt(num) * 2 - 1;
-  for (let i = 1; i <= num; i++) {
-    if (i == 1) {
-      console.log(" ".repeat(num - i + 1) + "*");
-    } else if (i == num) {
-      console.log("*".repeat(nLine));
-    } else {
-      console.log(" ".repeat(num - i) + "*" + " ".repeat(i * 2 - 1) + "*");
+  if (parseInt(num) === 1) {
+    console.log("*");
+    return;
+  } else {
+    for (let i = 1; i < parseInt(num); i++) {
+      let front = " ".repeat(num - i) + "*";
+      let back = i >= 2 ? " ".repeat((i - 1) * 2 - 1) + "*" : "";
+      console.log(front + back);
     }
+    console.log("*".repeat(num * 2 - 1));
   }
 });
