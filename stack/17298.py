@@ -27,42 +27,17 @@
 #     ans.append(ele)
 # print(' '.join(ans))
 
-# 시도
+# 
 import sys
-num =  int(sys.stdin.readline()) 
-arr = list(map(str, sys.stdin.readline().split()))
-stack = arr[::-1]
-ans = ['-1'] * num
-i = 0
-while len(stack) > 1:
-    target = stack.pop()
-    temp = stack[:]
-    while temp:
-        val = temp.pop()
-        if target < val:
-            ans[i] = val
-            break
-    i += 1
-
-print(' '.join(ans))
-
-
-
-numbers = int(input())
-num_list = list(map(int, input().split()))
+num = int(sys.stdin.readline()) 
+arr = list(map(int, sys.stdin.readline().split()))
 stack = []
-result = [-1 for _ in range(numbers)]
-
-for i in range(len(num_list)):
-    try:
-        while num_list[stack[-1]] < num_list[i]:
-            result[stack.pop()] = num_list[i]
-    except:
-        pass
-        
+stack.append(0)
+ans = [-1] * num
+for i in range(num):
+    while stack and arr[i] > arr[stack[-1]]:
+        ans[stack[-1]] = arr[i]
+        stack.pop()
     stack.append(i)
-        
-for i in range(numbers):
-    print(result[i], end = ' ')
 
-
+print(' '.join(str(x) for x in ans))
