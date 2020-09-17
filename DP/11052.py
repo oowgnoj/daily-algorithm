@@ -34,7 +34,7 @@ for i in range(1, num + 1):
         if memo[i] < memo[i-j] + lst[j]:
             memo[i] = memo[i-j] + lst[j]
 
-print(memo)
+print(memo[-1])
 
 
 # 좀 더 보기 쉽게
