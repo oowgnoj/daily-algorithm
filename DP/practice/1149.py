@@ -26,9 +26,8 @@ for i in range(1,loop+1):
 
 
 for i in range(1, loop+1):
-    for j in range(3):
-        DP[i][0] = min(DP[i-1][1], DP[i-1][2]) + lst[i][0]
-        DP[i][1] = min(DP[i-1][0], DP[i-1][2]) + lst[i][1]
-        DP[i][2] = min(DP[i-1][0], DP[i-1][1]) + lst[i][2]
+    DP[i][0] = min(DP[i-1][1], DP[i-1][2]) + lst[i][0]
+    DP[i][1] = min(DP[i-1][0], DP[i-1][2]) + lst[i][1]
+    DP[i][2] = min(DP[i-1][0], DP[i-1][1]) + lst[i][2]
     ans.append(min(DP[i]))
 print(ans[-1])
