@@ -5,6 +5,28 @@
 # 7명의 난쟁의 키의 합은 100이다.
 
 
-# loop = int(input())
+num = 9
+lst = []
+no = []
+for i in range(num):
+    lst.append(int(input()))
 
-# for i in range(loop)
+total = sum(lst)
+for i in range(num-1):
+    for j in range(i+1, num):
+        output = total - lst[i] - lst[j]
+        if output == 100:
+            no.append(lst[i])
+            no.append(lst[j])
+            break
+    else:
+        continue
+    break
+
+lst.sort()
+for el in lst:
+    if el not in no:
+        print(el)
+
+
+    
