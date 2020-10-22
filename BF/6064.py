@@ -17,28 +17,28 @@ loop = int(input())
 lst = []
 
 def calc(M,N, x, y):
-    lst = [[0,0]]
-    # M 과 N 의 최소공배수를 구한다.
-    a = 0
-    b = 0
-    for i in range(lcm(M,N)):
-        a+=1
-        b+=1
-        if a % M==0:
-            a = 0
-        if b % N==0:
-            b = 0
-        lst.append([a,b])
-    return lst, i
+    e = 1
+    celling = lcm(M,N)
+    while M * e + x <= celling:
+        x_candidate = M * e + x
+        e += 1
+        f = 1
+        while N * f + y <= celling:
+            y_candidate = N * f + y
+            print(x_candidate, y_candidate)
+            f = f+1
+            if x_candidate == y_candidate:
+                return x_candidate
+    return -1
+
 
 
 for i in range(loop):
     lst.append(list(map(int, str(input()).split(' '))))
 
 for i in range(loop):
-    print(lst)
     [M, N, x, y] = lst[i]
-    lst, year = calc(M,N,x,y)
+    year = calc(M,N,x,y)
     print(year)
     
 
