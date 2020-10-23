@@ -9,38 +9,22 @@
 # 10 12 7 2
 # 13 11 5 6
 
-from math import gcd
-def lcm(a,b):
-    return a*b // gcd(a,b)
 
-loop = int(input())
-lst = []
 
 def calc(M,N, x, y):
-    e = 1
-    celling = lcm(M,N)
-    while M * e + x <= celling:
-        x_candidate = M * e + x
-        e += 1
-        f = 1
-        while N * f + y <= celling:
-            y_candidate = N * f + y
-            print(x_candidate, y_candidate)
-            f = f+1
-            if x_candidate == y_candidate:
-                return x_candidate
+    while x <= M*N:
+        if (x-y)%n ==0:
+            return x
+        x=x+M
     return -1
 
 
 
-for i in range(loop):
-    lst.append(list(map(int, str(input()).split(' '))))
+t = int(input())
+for i in range(t):
+    m, n, x, y = map(int, input().split())
+    print(calc(m, n, x, y))
 
-for i in range(loop):
-    [M, N, x, y] = lst[i]
-    year = calc(M,N,x,y)
-    print(year)
-    
 
 
 
