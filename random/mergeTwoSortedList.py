@@ -8,6 +8,7 @@
 #         self.val = val
 #         self.next = next
 
+
 class Solution(object):
     def mergeTwoLists(self, l1, l2):
         """
