@@ -36,6 +36,9 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
+        if strs == []:
+        	return ''
+
         shortestWord = strs[0]
         for el in strs:
         	if len(el) < len(shortestWord):
@@ -43,8 +46,24 @@ class Solution(object):
 
     	for i in range(len(shortestWord), 0, -1):
     		for el in strs:
-    			if el[:i] != shortestWord[:i]:
+    			if el[:i] == shortestWord[:i]:
     				return shortestWord[:i]
+
+		return ''
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        ans = ''
+        if strs == []:
+        	return ans
+
+        shortestWord = strs[0]
+        for i in range(1, len(strs)):
+        	
 
 		return ''
 
