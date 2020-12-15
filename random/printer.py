@@ -2,9 +2,6 @@ def solution(priorities, location):
     answer = 0
     current_location = location
     while True:
-        # print("answer", answer)
-        # print("max ", max(priorities))
-        # print("current ", current_location)
         if priorities[0] == max(priorities):
             answer += 1
             if current_location == 0:
