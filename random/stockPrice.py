@@ -28,15 +28,14 @@
 
 def solution(prices):
     answer = []
-    for i, val in enumerate(prices):
+    for i in range(len(prices)):
         cnt = 0
         if len(prices)-1 == i:
             answer.append(cnt)
             break
-        for j, compare in enumerate(prices[i+1:]):
+        for j in range(i+1, len(prices)):
             cnt += 1
-            if compare < val or j == len(prices[i+1:])-1:
-                print('here', cnt)
+            if prices[j] < prices[i] or j == len(prices[i+1:])-1:
                 answer.append(cnt)
                 break
 
