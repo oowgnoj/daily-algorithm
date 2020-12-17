@@ -27,8 +27,6 @@ def solution(progresses, speeds):
     while deploy and speeds:
         deploy_count = 0
         day_count += 1
-        # print(deploy[0])
-        # print(speeds[0])
         while deploy and deploy[0] + speeds[0] * day_count >= 100:
             deploy_count += 1
             deploy.popleft()
