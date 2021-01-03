@@ -1,72 +1,55 @@
 # this is coding test 118page
-direction = [0, 1, 2, 3] # 북, 동, 남, 서
-
 [N, M]= list(map(int,input().split(' ')))
-[current_n, current_m, current_d] = list(map(int,input().split(' ')))
+visited = [[0]* N for _ in range(M)]
+[current_x, current_y, current_d] = list(map(int,input().split(' ')))
 
 game_map = []
 for i in range(N):
     # 육지 : 0, 바다 : 1
     game_map.append(list(map(int,input().split(' '))))
 
-def changeDirection (current_direction: int):
-    if current_direction == 0:
-        return 3
-    return current_direction -1
 
-def goForward(current_location:list, current_direction: int):
-    _current_location = current_location.copy()
-    if current_direction == 0:
-        _current_location[0] = _current_location[0] + 1
-    if current_direction == 2:
-        _current_location[0] = _current_location[0] - 1
-    if current_direction == 1:
-        _current_location[1] = _current_location[1] + 1
-    if current_direction == 3:
-        _current_location[1] = _current_location[1] -1
-    return _current_location
 
-def goBackward(current_location:list, current_direction: int):
-    _current_location = current_location.copy()
-    if current_direction == 0:
-        _current_location[0] = _current_location[0] -1
-    if current_direction == 1:
-        _current_location[1] = _current_location[1]- 1
-    if current_direction == 2:
-        _current_location[0] = _current_location[0] +1
-    if current_direction == 3:
-        _current_location[1] = _current_location[1] +1
-    return _current_location
+direction = [0, 1, 2, 3] # 북, 동, 남, 서
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
 
-current_location = [current_n, current_m]
-visited = []
-direction_history= []
+def changeDirection():
+    global current_d
+    if current_d == 0:
+        current_d = 3
+    else:
+        current_d = current_d -1
+
+turn_time= 0
 cnt = 1
+visited[current_x][current_y] = 1
 
 def Move():
-    global current_location, current_d, visited, direction_history, cnt
-    print('MOVE 함수 실행', current_location)
-    current_d = changeDirection(current_d)
-    next_location = goForward(current_location, current_d)
-    if next_location not in visited and game_map[next_location[0]][next_location[1]] == 0:
-        print('움직였음', next_location, current_d)
+    global current_x, current_y, current_d, visited, turn_time, cnt
+    changeDirection()
+    next_x = current_x + dx[current_d]
+    next_y = current_y + dy[current_d]
+    if visited[next_x][next_y] == 0 and game_map[next_x][next_y] == 0:
         cnt += 1
-        direction_history= []
-        visited.append(next_location)
-        current_location = next_location
+        current_x = next_x
+        current_y = next_y
+        turn_time= 0
+        visited[current_x][current_y] = 1
         Move()
     else:
-        print('안움직임', current_location, current_d)
-        direction_history.append(current_d)
-        if len(direction_history) >= 4:
-            print('동, 서 남, 북 모두 막힘')
-            next_location = goBackward(current_location, current_d)
-            if game_map[next_location[0]][next_location[1]] == 1:
+        turn_time += 1
+        if turn_time == 4:
+            next_x = current_x - dx[current_d]
+            next_y = current_y - dy[current_d]
+            if game_map[next_x][next_y] == 1:
+                # 바다인 경우
                 print('here', cnt)
                 return cnt
             else:
-                current_location = next_location
-                direction_history = []
+                current_x = next_x
+                current_y = next_y
+                turn_time = 0
         Move()
 
 Move()
@@ -89,3 +72,30 @@ Move()
 #       else:
 #           끝
 # 
+
+
+# 삭제
+# def goForward(current_location:list, current_direction: int):
+#     _current_location = current_location.copy()
+#     if current_direction == 0:
+#         _current_location[0] = _current_location[0] + 1
+#     if current_direction == 2:
+#         _current_location[0] = _current_location[0] - 1
+#     if current_direction == 1:
+#         _current_location[1] = _current_location[1] + 1
+#     if current_direction == 3:
+#         _current_location[1] = _current_location[1] -1
+#     return _current_location
+
+# def goBackward(current_location:list, current_direction: int):
+#     _current_location = current_location.copy()
+#     if current_direction == 0:
+#         _current_location[0] = _current_location[0] -1
+#     if current_direction == 1:
+#         _current_location[1] = _current_location[1]- 1
+#     if current_direction == 2:
+#         _current_location[0] = _current_location[0] +1
+#     if current_direction == 3:
+#         _current_location[1] = _current_location[1] +1
+#     return _current_location
+
