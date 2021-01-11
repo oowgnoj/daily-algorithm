@@ -37,12 +37,15 @@ def dfs(h, matures: list):
                     continue
                 if visited[h][new_c][new_r]:
                     continue
+                if box[h][new_c][new_r]:
+                    continue
 
                 visited[h][new_c][new_r] = True
                 box[h][new_c][new_r] = 1
                 temp.append([new_c, new_r])
-        days +=1
-        q = temp
+        if temp:
+            days +=1
+            q = temp
     return days
 
 
@@ -62,8 +65,7 @@ for h in range(H):
     if isFalse:
         break
 
-print(box)
-print(answers)
+
 if isFalse:
     print(-1)
 else:
