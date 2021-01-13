@@ -1,16 +1,16 @@
 # 경쟁적 전염
 from collections import deque
-C, R = map(int,input().split(' '))
+C, K = map(int,input().split(' '))
 matrix = [list(map(int,input().split(' '))) for i in range(C)]
 
-visited = [[False for i in range(R)] for i in range(C)]
+visited = [[False for i in range(C)] for i in range(C)]
 # S 초 후,  Y(column), X(row)
-S, X, Y=map(int,input().split(' '))
+S, Y, X=map(int,input().split(' '))
 
 def get_virus():
     answer =[]
     for i in range(C):
-        for j in range(R):
+        for j in range(C):
             value = matrix[i][j]
             if value != 0:
                 answer.append((i,j,value))
@@ -25,6 +25,8 @@ nx = [1,-1,0,0]
 time = 0
 
 while queue:
+    if time == S:
+        break
     temp = deque()
     while queue:
         c, r, v = queue.popleft()
@@ -33,7 +35,7 @@ while queue:
             y = c+ny[i]
             x = r+nx[i]
 
-            if y < 0 or x < 0 or y >= C or x >= R:
+            if y < 0 or x < 0 or y >= C or x >= C:
                 continue
             if visited[y][x]:
                 continue 
@@ -41,11 +43,9 @@ while queue:
                 continue
 
             visited[y][x]= True
-            matrix[y][x]= v+1
-            temp.append((y,x,v+1))
+            matrix[y][x]= v
+            temp.append((y,x,v))
     time +=1
-    if time == S:
-        break
     queue = temp
 
 print(matrix[Y-1][X-1])
