@@ -15,4 +15,3 @@ for i in range(1,n+1):
         DP.append(temp)
 
 print(min(DP[n]))
-    
