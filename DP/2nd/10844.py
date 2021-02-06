@@ -1,15 +1,30 @@
-mod = 1000000000
-num = int(input())
-DP = [[0,0,0,0,0,0,0,0,0,0] for _ in range(101)]
-DP[1] = [0,1,1,1,1,1,1,1,1,1]
+import sys
+import copy
+input = sys.stdin.readline
+n = int(input())
+lst = list(map(int, input().split(' ') )) 
 
-for i in range(2, num+1):
-    for j in range(10):
-        if j == 0:
-            DP[i][j] = DP[i-1][j+1] % mod 
-        elif j ==9:
-            DP[i][j] = DP[i-1][j-1] % mod   
-        else:
-            DP[i][j] = DP[i-1][j-1] + DP[i-1][j+1] % mod
+DP = [[[lst[0], 1]], []]
+for i in range(1, n):
+    temp = DP[0]
+    for j in range(len(DP[0])):
+        largest, num = DP[0][j]
+        # i 번째 값이 기존 수열의 마지막 값보다 클 때
+        if lst[i] > largest:
+            temp[j][0] = lst[i]
+            temp[j][1] = num+1
+        # i 번째 값이 기존 수열의 마지막 값보다 작을 때
+        elif lst[i] < largest:
+            x = [_[0] for _ in DP[0] if _[0] < largest]
+            if not x:
+                temp.append([lst[i], 1])
+        
+        elif lst[i] == largest:
+            continue
+    # print(temp)
+    DP[0] = temp
+# print(DP)
+print(max([_[1] for _ in DP[0]]))
 
-print(sum(DP[num])%mod)
+
+
